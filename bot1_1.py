@@ -1,7 +1,7 @@
 import telebot
 import os
 import random
-
+import urllib.request as urllib2
 
 token="554192076:AAG_LTd1yE2rrDle0Z_JRvHAKLVZPvoVKGs"
 bot=telebot.TeleBot(token)
@@ -19,10 +19,11 @@ bot=telebot.TeleBot(token)
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if message.text == 'фото':
-        directory = 'C:\\Users\\User\\PycharmProjects\\imge'
-        all_files_of_directory=os.listdir(directory)
-        random_file=random.choice(all_files_of_directory)
-        img=open(directory + '/' + random_file,'rb')
+        url = 'https://www.youtube.com/yts/img/yt_1200-vfl4C3T0K.png'
+        urllib2.urlretrieve(url,"url_image")
+        #all_files_of_directory=os.listdir(directory)
+       # random_file=random.choice(all_files_of_directory)
+        img=open('url_image','rb')
         bot.send_chat_action(message.from_user.id,'upload_photo')
         bot.send_photo(message.from_user.id,img)
         img.close()
@@ -32,4 +33,8 @@ def handle_text(message):
         bot.send_chat_action(message.from_user.id,'upload_audio')
         bot.send_audio(message.from_user.id,audio)
         audio.close()
-bot.polling(none_stop=True,interval=0s)
+    elif message.text == 'а':
+        
+        bot.send_message(message.from_user.id,"b")
+
+bot.polling(none_stop=True,interval=0)
